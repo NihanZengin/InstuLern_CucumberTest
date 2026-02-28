@@ -1,10 +1,7 @@
 package utilities;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -279,5 +276,25 @@ public class ReusableMethods {
         // gecici dosyayi asil dosyaya kopyalayalim
         FileUtils.copyFile(geciciDosya, asilResimDosyasi);
         return dosyaYolu;
+    }
+
+    public static void scrollDown() {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("window.scrollBy(0,500)");
+    }
+
+    public static void scrollDown(int pixel) {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("window.scrollBy(0," + pixel + ")");
+    }
+
+    public static void scrollToBottom() {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+
+    public static void scrollToElement(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 }
