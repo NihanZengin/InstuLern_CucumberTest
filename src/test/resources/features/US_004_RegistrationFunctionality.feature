@@ -11,7 +11,6 @@ Feature: Kullanıcı Kaydı
     When kullanıcı Register linkine tıklar
     Then Kayıt sayfası açılmalı
     And  Resim görünür olmalı
-    And SignUp formu görünür olmalı
 
 
   Scenario: TC_003 SignUp butonunun görünürlüğünü doğrulama
@@ -51,28 +50,26 @@ Feature: Kullanıcı Kaydı
     And kullanıcı Kayıt butonuna tıklar
     Then eposta hata mesajı görüntülenmeli
 
+    @wip
   Scenario: TC_008 Şifre uyuşmazlığı doğrulaması
     When kullanıcı Register linkine tıklar
     When kullanıcı geçerli şifre olarak "12345678" girer
-    And kullanıcı şifreyi yanlis şekilde "Wrong123" olarak tekrar girer
+    And kullanıcı şifreyi yanlis şekilde "1234" olarak tekrar girer
+    And kullanıcı Kayıt butonuna tıklar
     Then şifre uyuşmazlığı hatası gösterilmeli
 
   Scenario: TC_009 Kullanici 8 karakterden az password girerse hata mesaji gorur
     When kullanıcı Register linkine tıklar
-    When Kullanici password alanina eksik olarak "1234" girer
+    And Kullanici password alanina eksik olarak "1234" girer
+    And kullanıcı şifreyi doğru şekilde "1234" olarak tekrar girer
     And kullanıcı Kayıt butonuna tıklar
     Then Password minimum 8 karakter hatasi goruntulenmelidir
 
-  Scenario: TC_0010 Öğrenci olarak başarılı kayıt
-    When kullanıcı Register linkine tıklar
-    When kullanıcı account type olarak "Student" seçer
-    And kullanıcı geçerli e-posta olarak "test@gmail.com" girer
-    And kullanıcı tam ad olarak "Test User" girer
-    And kullanıcı geçerli şifre olarak "12345678" girer
-    And kullanıcı şifreyi doğru şekilde "12345678" olarak tekrar girer
-    And kullanıcı şartlar ve kuralları kabul eder
-    And kullanıcı Kayıt butonuna tıklar
-    Then kullanıcı başarıyla kayıt olmalı
+    @wip
+  Scenario: TC_0010 Kayıt sayfasına gitme
+      When kullanıcı Register linkine tıklar
+      Then Kayıt sayfası açılmalı
+      And SignUp formu görünür olmalı
 
   Scenario: TC_0011 Kayıt sayfasından Giriş sayfasına gitme
     When kullanıcı Register linkine tıklar

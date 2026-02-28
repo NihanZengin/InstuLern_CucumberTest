@@ -169,7 +169,15 @@ public class US_004_RegistrationFunctionalityStepdefinitions {
 
     @When("kullanıcı şartlar ve kuralları kabul eder")
     public void kullaniciSartlariKabulEder() {
-        RegisterPage.acceptTerms();
+        WebElement checkbox = RegisterPage.termsCheckbox;
+
+        ReusableMethods.bekle(2);
+        if (!checkbox.isSelected()) {
+            checkbox.click();
+        }
+        // Doğrulama: checkbox seçili olmamalı
+        Assertions.assertTrue(checkbox.isSelected(), "Terms & Rules checkbox seçili olmamalı");
+
     }
 
     @When("kullanıcı şartlar ve kuralları kabul etmez")
@@ -212,7 +220,7 @@ public class US_004_RegistrationFunctionalityStepdefinitions {
     }
 
     @Then("Password minimum 8 karakter hatasi goruntulenmelidir")
-    public void password_min_karajter_hatasi_goruntulenmelidir() {
+    public void password_min_karakter_hatasi_goruntulenmelidir() {
 
         Assertions.assertTrue(RegisterPage.passwordMinCharacterError.isDisplayed());
     }
@@ -230,6 +238,7 @@ public class US_004_RegistrationFunctionalityStepdefinitions {
 
     @Then("şifre uyuşmazlığı hatası gösterilmeli")
     public void sifreUyusmazligiHatasiGosterilmeli() {
+       ReusableMethods.bekle(3);
         Assertions.assertTrue(RegisterPage.passwordMismatchMessage.isDisplayed());
     }
 

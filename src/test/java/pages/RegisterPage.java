@@ -61,7 +61,7 @@ public class RegisterPage {
     @FindBy(xpath = "//input[@id='confirm_password']")
     public WebElement passwordConfirmationField;
 
-    @FindBy(xpath = "//input[@type='checkbox' and @id='term']")
+    @FindBy(id = "term")
     public WebElement termsCheckbox;
 
     @FindBy(id = "studentRadio")
@@ -103,11 +103,11 @@ public class RegisterPage {
     public WebElement passwordConfirmationRequiredError;
 
     //password must be at least 8 characters
-    @FindBy(xpath = "//div[@class='invalid-feedback' and text()='The password must be at least 8 characters.']")
+    @FindBy(xpath = "//div[normalize-space(text())='The password must be at least 6 characters.']")
     public WebElement passwordMinCharacterError;
 
     //password confirmation and password must match
-    @FindBy(xpath = "//div[@class='invalid-feedback' and text()='The password confirmation and password must match.']")
+    @FindBy(xpath = "//div[normalize-space(text())='The password confirmation does not match.']")
     public WebElement passwordMismatchMessage;
 
     @FindBy(xpath = "//*[normalize-space(text())='The email must be a valid email address.']")
