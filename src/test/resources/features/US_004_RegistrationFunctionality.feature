@@ -19,7 +19,6 @@ Feature: Kullanıcı Kaydı
     And SignUp butonu tıklanabilir olmalı
 
 
-
   Scenario: TC_004 Signup formu içerisinde 'Account type' butonları (Student,Instructor,Organization) gorunur ve secilebilir olmalı
     When kullanıcı Register linkine tıklar
     Then Account type butonları görünür olmalı

@@ -61,12 +61,14 @@ public class RegisterPage {
     @FindBy(xpath = "//input[@id='confirm_password']")
     public WebElement passwordConfirmationField;
 
+    //term Check Box
     @FindBy(id = "term")
     public WebElement termsCheckbox;
 
     @FindBy(id = "studentRadio")
     public WebElement studentRadioButton;
 
+   //login Page Basligi
     @FindBy(xpath = "//h1[text()='Log in to your account']")
     public WebElement loginPageTitle;
 
