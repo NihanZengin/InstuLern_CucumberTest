@@ -11,6 +11,10 @@ import utilities.ReusableMethods;
 
 public class US_004_RegistrationFunctionalityStepdefinitions {
 
+    //---------------------------------------------------------------------------------------------------------
+    //----------------- US_004_RegistrationFunctionalityStepdefinitions----------------------------------------
+    //---------------------------------------------------------------------------------------------------------
+
     RegisterPage RegisterPage = new RegisterPage();
 
     @Given("kullanici_InstuLern_anasayfaya_gider")
@@ -251,4 +255,9 @@ public class US_004_RegistrationFunctionalityStepdefinitions {
     public void girisSayfasiAcilmali() {
         Assertions.assertTrue(RegisterPage.loginPageTitle.isDisplayed());
     }
+
+
+    //---------------------------------------------------------------------------------------------------------
+    //----------------- US_034_InstructorPageFunctionalityStepDefinitions----------------------------------------
+    //---------------------------------------------------------------------------------------------------------
 }
