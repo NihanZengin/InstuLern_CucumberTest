@@ -189,9 +189,91 @@ public class US_034_InstructorPageFunctionalityStepDefinitions {
         MeetingPage.reserveMeetingButton.click();
     }
 
+    @And("Kullanici bir aciklama girer")
+    public void kullanici_bir_aciklama_girer() {
+        MeetingPage.descriptionTextArea.sendKeys("Test description");
+    }
+
+    @And("Kullanici sepete tiklar")
+    public void kullanici_sepete_tiklar() {
+        MeetingPage.shoppingCartButton.click();
+    }
+
+    @And("Kullanici Go to Card butonuna tiklar")
+    public void kullanici_go_to_card_butonuna_tiklar() {
+        MeetingPage.goToCartButton.click();
+    }
+
+    @And("Kullanici Checkout butonuna tiklar")
+    public void kullanici_checkout_butonuna_tiklar() {
+        MeetingPage.checkoutButton.click();
+    }
+
     @When("Kullanici odeme turu olarak {string} secer")
     public void kullanici_odeme_turu_olarak_secer(String paymentType) {
 
         MeetingPage.selectPaymentType(paymentType);
     }
+
+    @And("Kullanici Start Payment butonuna tiklar")
+    public void kullanici_start_payment_butonuna_tiklar() {
+        MeetingPage.startPaymentButton.click();
+    }
+
+    @Then("Kullanici eposta olarak {string} girer")
+    public void kullanici_eposta_olarak_girer(String email) {
+        MeetingPage.enterEmail(email);
+    }
+
+    @Then("Kullanici odeme yontemi formunu doldurur")
+    public void kullanici_kart_bilgilerini_girer() {
+        MeetingPage.fillCardDetails(
+                "Ahmet Yilmaz",
+                "4242 4242 4242 4242",
+                "02/27",
+                "123"
+        );
+
+
+    }
+
+    @And("Kullanici Ode butonuna tiklar")
+    public void kullanici_ode_butonuna_tiklar() {
+        MeetingPage.payButton.click();
+    }
+
+    @Then("Congratulations mesajı görüntülenmeli")
+    public void congratulations_mesaji_goruntulenmeli() {
+
+        Assertions.assertTrue(MeetingPage.congratulationsTitle.isDisplayed());
+    }
+
+    @Then("My Panel butonu görünür olmalı")
+    public void my_panel_butonu_gorunur_olmali() {
+
+        Assertions.assertTrue(MeetingPage.myPanelButton.isDisplayed());
+    }
+
+    @And("My Panel butonu tıklanabilir olmalı")
+    public void my_panel_butonu_tiklanabilir_olmali() {
+
+         Assertions.assertTrue(MeetingPage.myPanelButton.isEnabled());
+    }
+
+    @And("My panel butonuna tiklayinca Events sayfasina gectigi dogrulanir")
+    public void my_panel_butonuna_tiklayinca_events_sayfasina_gectigi_dogrulanir() {
+
+
+        MeetingPage.myPanelButton.click();
+
+
+        Assertions.assertTrue(MeetingPage.eventsPageTitle.isDisplayed());
+
+        Assertions.assertTrue(Driver.getDriver().getCurrentUrl().contains("/panel"));
+    }
+
+
+
+
+
 }

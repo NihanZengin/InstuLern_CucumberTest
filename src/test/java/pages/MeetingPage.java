@@ -75,6 +75,8 @@ public class MeetingPage {
     @FindBy(css = "div.mt-30 input[name='categories[]'] + label")
     public List<WebElement> categoryLabels;
 
+
+
     @FindBy(css = "#bestRateInstructorsSwiper .course-teacher-card")
     public List<WebElement> instructorCards;
 
@@ -96,8 +98,26 @@ public class MeetingPage {
     @FindBy(id = "plotId")
     public WebElement calendarArea;
 
+    @FindBy(name = "description")
+    public WebElement descriptionTextArea;
+
     @FindBy(xpath = "//button[normalize-space()='Reserve a Meeting']")
     public WebElement reserveMeetingButton;
+
+
+
+
+
+    @FindBy(id = "navbarShopingCart")
+    public WebElement shoppingCartButton;
+
+    @FindBy(xpath = "//a[normalize-space()='Go to cart']")
+    public WebElement goToCartButton;
+
+    @FindBy(xpath = "//button[normalize-space()='Checkout']")
+    public WebElement checkoutButton;
+
+
 
     // Stripe ödeme seçeneği
     @FindBy(xpath = "//label[@for='Stripe']")
@@ -106,6 +126,20 @@ public class MeetingPage {
     // Offline / Account Charge ödeme seçeneği
     @FindBy(xpath = "//label[@for='offline']")
     public WebElement offlinePaymentOption;
+
+    @FindBy(id = "paymentSubmit")
+    public WebElement startPaymentButton;
+
+
+
+    @FindBy(id = "cardNumber")
+    public WebElement cardNumberInput;
+
+
+    @FindBy(xpath = "//button[@type='submit']")
+    public WebElement payButton;
+
+
 
     //Congratulations basligi
     @FindBy(xpath = "//h2[.='Congratulations!']")
@@ -139,6 +173,11 @@ public class MeetingPage {
         passwordInput.clear();
         passwordInput.sendKeys(password);
         loginSubmitButton.click();
+    }
+
+    public void enterEmail(String email){
+        emailInput.clear();
+        emailInput.sendKeys(email);
     }
 
     //dinamik date methodu
@@ -191,6 +230,46 @@ public class MeetingPage {
                 throw new IllegalArgumentException("Gecersiz odeme tipi: " + paymentType);
         }
     }
+
+    public void enterCardNumber(String cardNumber){
+        cardNumberInput.clear();
+        cardNumberInput.sendKeys(cardNumber);
+    }
+
+    public void fillCardDetails(String fullName, String number, String expiry, String cvc){
+
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+
+        // Billing Name doldur (iframe DIŞI)
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("billingName")))
+                .sendKeys(fullName);
+
+        // Stripe iframe'e geç
+        WebElement iframe = wait.until(
+                ExpectedConditions.presenceOfElementLocated(
+                        By.cssSelector("iframe[name^='__privateStripeFrame']")
+                )
+        );
+
+        Driver.getDriver().switchTo().frame(iframe);
+
+        // Kart numarası
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("cardNumber")))
+                .sendKeys(number);
+
+        // Son kullanma tarihi
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("cardExpiry")))
+                .sendKeys(expiry);
+
+        // CVC
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("cardCvc")))
+                .sendKeys(cvc);
+
+        // Ana content'e geri dön
+        Driver.getDriver().switchTo().defaultContent();
+    }
+
+
 }
 
 

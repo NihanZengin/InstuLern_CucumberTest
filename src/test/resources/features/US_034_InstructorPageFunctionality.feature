@@ -63,6 +63,7 @@ Feature: Instructors Sayfası Fonksiyonel Testleri
     When Kullanıcı "2026-03-18" tarihini secer
     And Kullanıcı "10:30AM-11:30AM" zaman araligini secer
     And Kullanıcı meeting Type olarak "Online" secer
+    And Kullanici bir aciklama girer
     And Kullanici Reserve a Meeting butonuna tiklar
     And Kullanici sepete tiklar
     And Kullanici Go to Card butonuna tiklar
@@ -74,6 +75,7 @@ Feature: Instructors Sayfası Fonksiyonel Testleri
     And Kullanici Ode butonuna tiklar
     Then My Panel butonu görünür olmalı
     And My Panel butonu tıklanabilir olmalı
+    And My panel butonuna tiklayinca Events sayfasina gectigi dogrulanir
 
   Rule:  Kullanici Instructor olarak login olur
 
@@ -85,7 +87,7 @@ Feature: Instructors Sayfası Fonksiyonel Testleri
     Scenario: TC_009 Instructors linkine tıklandığında sayfa başlığı görüntülenmeli
       When Kullanıcı "Instructor" olarak login olur
       Then Kullanici Instructors linkine tıklar
-      Then Sayfada Instructors metni görüntülenmeli
+      Then Sayfada Instructors basligi görüntülenmeli
 
     Scenario: TC_010 Instructors sayfasında arama alanları görünür ve aktif olmalı
       When Kullanıcı "Instructor" olarak login olur
@@ -106,7 +108,7 @@ Feature: Instructors Sayfası Fonksiyonel Testleri
     Scenario: TC_012 Seçilen instructor bilgileri görüntülenmeli
       When Kullanıcı "Instructor" olarak login olur
       Then Kullanici Instructors linkine tıklar
-      When Kullanıcı "1" siradaki instructori seçer
+      When Kullanıcı "1". siradaki instructori seçer
       Then Instructor fiyat bilgisi görünür olmalı
       And Instructor ders adı görünür olmalı
       And Instructor beğeni bilgisi görünür olmalı
@@ -114,11 +116,10 @@ Feature: Instructors Sayfası Fonksiyonel Testleri
     Scenario: TC_013 Instructor için randevu talebi başarıyla oluşturulabilmeli
       When Kullanıcı "Instructor" olarak login olur
       Then Kullanici Instructors linkine tıklar
-      And Kullanıcı "1" siradaki instructori seçer
-      When Kullanıcı "2026-03-18" tarihini secer.
-      And Kullanıcı meeting icin zaman araligi secer
-      And Kullanıcı meeting Type"i "Online" olarak secer
-      And Kullanici aciklamaya "a" yazar
+      And Kullanıcı "1". siradaki instructori seçer
+      When Kullanıcı "2026-03-18" tarihini secer
+      And Kullanıcı "10:30AM-11:30AM" zaman araligini secer
+      And Kullanıcı meeting Type olarak "Online" secer
       And Kullanici Reserve a Meeting butonuna tiklar
       And Kullanici sepete tiklar
       And Kullanici Go to Card butonuna tiklar
@@ -133,11 +134,9 @@ Feature: Instructors Sayfası Fonksiyonel Testleri
     Scenario: TC_014 My Panel butonu görünür ve aktif olmalı
       When Kullanıcı "Instructor" olarak login olur
       Then Kullanici Instructors linkine tıklar
-      And Kullanıcı "1" siradaki instructori seçer
-      When Kullanıcı "2026-03-18" tarihini secer.
-      And Kullanıcı meeting icin zaman araligi secer
-      And Kullanıcı meeting Type"i "Online" olarak secer
-      And Kullanici aciklamaya "a" yazar
+      When Kullanıcı "2026-03-18" tarihini secer
+      And Kullanıcı "10:30AM-11:30AM" zaman araligini secer
+      And Kullanıcı meeting Type olarak "Online" secer
       And Kullanici Reserve a Meeting butonuna tiklar
       And Kullanici sepete tiklar
       And Kullanici Go to Card butonuna tiklar
@@ -149,3 +148,4 @@ Feature: Instructors Sayfası Fonksiyonel Testleri
       And Kullanici Ode butonuna tiklar
       Then My Panel butonu görünür olmalı
       And My Panel butonu tıklanabilir olmalı
+      And My panel butonuna tiklayinca Events sayfasina gectigi dogrulanir
