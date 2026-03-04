@@ -270,7 +270,9 @@ public class US_034_InstructorPageFunctionalityStepDefinitions {
     @And("Kullanici Ode butonuna tiklar")
     public void kullanici_ode_butonuna_tiklar() {
 
-        MeetingPage.payButton.click();
+        ReusableMethods.scrollToElement(MeetingPage.payButton);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.elementToBeClickable(MeetingPage.payButton)).click();
     }
 
     @Then("Congratulations mesajı görüntülenmeli")
