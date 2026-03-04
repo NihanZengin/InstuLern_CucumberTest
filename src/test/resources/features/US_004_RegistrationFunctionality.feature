@@ -49,7 +49,7 @@ Feature: Kullanıcı Kaydı
     And kullanıcı Kayıt butonuna tıklar
     Then eposta hata mesajı görüntülenmeli
 
-    @wip
+
   Scenario: TC_008 Şifre uyuşmazlığı doğrulaması
     When kullanıcı Register linkine tıklar
     When kullanıcı geçerli şifre olarak "12345678" girer
@@ -64,7 +64,7 @@ Feature: Kullanıcı Kaydı
     And kullanıcı Kayıt butonuna tıklar
     Then Password minimum 8 karakter hatasi goruntulenmelidir
 
-    @wip
+
   Scenario: TC_0010 Kayıt sayfasına gitme
       When kullanıcı Register linkine tıklar
       Then Kayıt sayfası açılmalı

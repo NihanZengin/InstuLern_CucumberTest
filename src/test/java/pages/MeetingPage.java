@@ -60,7 +60,7 @@ public class MeetingPage {
     @FindBy(xpath = "//h3[normalize-space()='Categories']")
     public WebElement categoriesTitle;
 
-    @FindBy(css = "input[name='categories[]']")
+    @FindBy(xpath = "//*[@class='checkbox-button bordered-200 mr-20']")
     public List<WebElement> categoryCheckboxes;
 
     //kategori filtresinden sonra instructor listesi
@@ -81,22 +81,48 @@ public class MeetingPage {
     public List<WebElement> instructorCards;
 
     // Kart içindeki fiyat
-    @FindBy(css = ".course-teacher-card .font-20.text-primary, .course-teacher-card .font-20.text-primary.font-weight-bold")
+    @FindBy(css = ".course-teacher-card span.font-20.text-primary")
     public List<WebElement> instructorPrices;
+
+    // İlk instructor kartındaki güncel fiyat
+    @FindBy(css = ".course-teacher-card:first-of-type span.font-20.text-primary")
+    public WebElement firstInstructorPrice;
 
     // Kart içindeki ders adı (instructor adı)
     @FindBy(css = ".course-teacher-card h3")
     public List<WebElement> instructorNames1;
 
+    // İlk instructor kartındaki isim
+    @FindBy(css = ".course-teacher-card:first-of-type h3.mt-20.font-16.font-weight-bold.text-dark-blue")
+    public WebElement firstInstructorName;
+
+    // İlk instructor kartındaki ders/unvan bilgisi
+    @FindBy(css = ".course-teacher-card:first-of-type div.mt-5.font-14.text-gray")
+    public WebElement firstInstructorTitle;
+
     // Kart içindeki beğeni (rating)
     @FindBy(css = ".course-teacher-card .badge-primary")
     public List<WebElement> instructorRatings;
+
+    // İlk instructor kartındaki rating / beğeni bilgisi
+    @FindBy(css = ".course-teacher-card:first-of-type span.badge.badge-primary")
+    public WebElement firstInstructorRating;
+
 
     @FindBy(xpath = "//a[contains(@href,'/profile?tab=appointments') and contains(@class,'btn-primary')]")
     public List<WebElement> reserveMeetingButtons;
 
     @FindBy(id = "plotId")
     public WebElement calendarArea;
+
+
+    // İlk instructor için ilk saat aralığı label
+    @FindBy(xpath = "(//div[contains(@class,'course-teacher-card')]//div[contains(@class,'available-times')]//label)[1]")
+    public WebElement instructorFirstTimeLabel;
+
+    @FindBy(id = "availableTime91")
+    public WebElement availableTime;
+
 
     @FindBy(name = "description")
     public WebElement descriptionTextArea;
@@ -114,13 +140,13 @@ public class MeetingPage {
     @FindBy(xpath = "//a[normalize-space()='Go to cart']")
     public WebElement goToCartButton;
 
-    @FindBy(xpath = "//button[normalize-space()='Checkout']")
+    @FindBy(css = "label[for='Stripe']")
     public WebElement checkoutButton;
 
 
 
     // Stripe ödeme seçeneği
-    @FindBy(xpath = "//label[@for='Stripe']")
+    @FindBy(css = "label[for='Stripe']")
     public WebElement stripePaymentOption;
 
     // Offline / Account Charge ödeme seçeneği
@@ -180,6 +206,12 @@ public class MeetingPage {
         emailInput.sendKeys(email);
     }
 
+    public void selectCategory(String categoryName) {
+        WebElement category =
+                Driver.getDriver().findElement(By.xpath("//label[normalize-space()='" + categoryName + "']"));
+        category.click();
+    }
+
     //dinamik date methodu
     public void selectDate(String date){
 
@@ -236,40 +268,37 @@ public class MeetingPage {
         cardNumberInput.sendKeys(cardNumber);
     }
 
-    public void fillCardDetails(String fullName, String number, String expiry, String cvc){
+    public void fillCardDetails( String number, String expiry, String cvc, String fullName) {
 
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(15));
 
-        // Billing Name doldur (iframe DIŞI)
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("billingName")))
-                .sendKeys(fullName);
-
-        // Stripe iframe'e geç
-        WebElement iframe = wait.until(
-                ExpectedConditions.presenceOfElementLocated(
-                        By.cssSelector("iframe[name^='__privateStripeFrame']")
-                )
+        // ---------------- CARD NUMBER ----------------
+        WebElement cardNumber = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("cardNumber"))
         );
 
-        Driver.getDriver().switchTo().frame(iframe);
+       cardNumber.sendKeys(number);
 
-        // Kart numarası
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("cardNumber")))
-                .sendKeys(number);
 
-        // Son kullanma tarihi
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("cardExpiry")))
-                .sendKeys(expiry);
+        // ---------------- EXPIRY ----------------
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.id("cardExpiry"))).sendKeys(expiry);
 
-        // CVC
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("cardCvc")))
-                .sendKeys(cvc);
 
-        // Ana content'e geri dön
-        Driver.getDriver().switchTo().defaultContent();
+
+        // ---------------- CVC ----------------
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.id("cardCvc"))).sendKeys(cvc);
+
+
+
+
+        // ---------------- BILLING NAME ----------------
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.id("billingName")
+        )).sendKeys(fullName);
+
     }
-
-
 }
 
 
