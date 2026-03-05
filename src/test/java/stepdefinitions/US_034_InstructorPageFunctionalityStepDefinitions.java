@@ -275,8 +275,12 @@ public class US_034_InstructorPageFunctionalityStepDefinitions {
         wait.until(ExpectedConditions.elementToBeClickable(MeetingPage.payButton)).click();
     }
 
+
     @Then("Congratulations mesajı görüntülenmeli")
     public void congratulations_mesaji_goruntulenmeli() {
+
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(MeetingPage.congratulationsTitle));
 
         Assertions.assertTrue(MeetingPage.congratulationsTitle.isDisplayed());
     }
@@ -284,20 +288,30 @@ public class US_034_InstructorPageFunctionalityStepDefinitions {
     @Then("My Panel butonu görünür olmalı")
     public void my_panel_butonu_gorunur_olmali() {
 
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(MeetingPage.myPanelButton));
+
         Assertions.assertTrue(MeetingPage.myPanelButton.isDisplayed());
     }
 
     @And("My Panel butonu tıklanabilir olmalı")
     public void my_panel_butonu_tiklanabilir_olmali() {
 
-         Assertions.assertTrue(MeetingPage.myPanelButton.isEnabled());
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(MeetingPage.myPanelButton));
+
+        Assertions.assertTrue(MeetingPage.myPanelButton.isEnabled());
     }
 
     @And("My panel butonuna tiklayinca Events sayfasina gectigi dogrulanir")
     public void my_panel_butonuna_tiklayinca_events_sayfasina_gectigi_dogrulanir() {
 
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.elementToBeClickable(MeetingPage.myPanelButton));
 
         MeetingPage.myPanelButton.click();
+
+        wait.until(ExpectedConditions.visibilityOf(MeetingPage.eventsPageTitle));
 
 
         Assertions.assertTrue(MeetingPage.eventsPageTitle.isDisplayed());

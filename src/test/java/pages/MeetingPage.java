@@ -172,15 +172,12 @@ public class MeetingPage {
     public WebElement congratulationsTitle;
 
     //My Panel Butonu
-    @FindBy(xpath = "//a[@href='/panel']")
+    @FindBy(linkText = "My Panel")
     public WebElement myPanelButton;
 
     @FindBy(xpath = "//h1[text()='Events']")
     public WebElement eventsPageTitle;
 
-//    public void verifyEventsPageOpened() {
-//        Assertions.assertTrue(eventsPageTitle.isDisplayed());
-//    }
 
 
 

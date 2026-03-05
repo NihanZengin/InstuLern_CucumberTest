@@ -41,6 +41,7 @@ Feature: Instructors Sayfası Fonksiyonel Testleri
     Then Kullanici Instructors linkine tıklar
     And Kullanıcı "1". siradaki instructori seçer
     When Kullanıcı "2026-03-10" tarihini secer
+     # tarih daha once reserve edilmisse testi baslatmadan once tarihi degistiriniz
     And Kullanıcı ilk zaman araligini secer
     And Kullanıcı meeting Type olarak "Online" secer
     And Kullanici Reserve a Meeting butonuna tiklar
@@ -56,6 +57,7 @@ Feature: Instructors Sayfası Fonksiyonel Testleri
     Then Kullanici Instructors linkine tıklar
     And Kullanıcı "1". siradaki instructori seçer
     When Kullanıcı "2026-03-18" tarihini secer
+    # tarih daha once reserve edilmisse testi baslatmadan once tarihi degistiriniz
     And Kullanıcı ilk zaman araligini secer
     And Kullanıcı meeting Type olarak "Online" secer
     And Kullanici bir aciklama girer
@@ -101,7 +103,6 @@ Feature: Instructors Sayfası Fonksiyonel Testleri
     Scenario: TC_012 Seçilen instructor bilgileri görüntülenmeli
       When Kullanıcı "Instructor" olarak login olur
       Then Kullanici Instructors linkine tıklar
-      When Kullanıcı "1". siradaki instructori seçer
       Then Instructor fiyat bilgisi görünür olmalı
       And Instructor ders adı görünür olmalı
       And Instructor beğeni bilgisi görünür olmalı
@@ -111,11 +112,10 @@ Feature: Instructors Sayfası Fonksiyonel Testleri
       Then Kullanici Instructors linkine tıklar
       And Kullanıcı "1". siradaki instructori seçer
       When Kullanıcı "2026-03-18" tarihini secer
+      # tarih daha once reserve edilmisse testi baslatmadan once tarihi degistiriniz
       And Kullanıcı ilk zaman araligini secer
       And Kullanıcı meeting Type olarak "Online" secer
       And Kullanici Reserve a Meeting butonuna tiklar
-      And Kullanici sepete tiklar
-      And Kullanici Go to Card butonuna tiklar
       And Kullanici Checkout butonuna tiklar
       When Kullanici odeme turu olarak stripe secer
       And Kullanici Start Payment butonuna tiklar
@@ -128,11 +128,10 @@ Feature: Instructors Sayfası Fonksiyonel Testleri
       When Kullanıcı "Instructor" olarak login olur
       Then Kullanici Instructors linkine tıklar
       When Kullanıcı "2026-03-18" tarihini secer
+      # tarih daha once reserve edilmisse testi baslatmadan once tarihi degistiriniz
       And Kullanıcı ilk zaman araligini secer
       And Kullanıcı meeting Type olarak "Online" secer
       And Kullanici Reserve a Meeting butonuna tiklar
-      And Kullanici sepete tiklar
-      And Kullanici Go to Card butonuna tiklar
       And Kullanici Checkout butonuna tiklar
       When Kullanici odeme turu olarak stripe secer
       And Kullanici Start Payment butonuna tiklar
